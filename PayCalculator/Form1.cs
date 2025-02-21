@@ -16,5 +16,33 @@ namespace PayCalculator
         {
             InitializeComponent();
         }
+
+        private void calcButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double taxRate = 0.2;
+
+                //get inputs
+                double hours = Convert.ToDouble(hoursInput.Text);
+                double rate = Convert.ToDouble(payRateInput.Text);
+
+                //calcuations
+                double pretax = rate * hours;
+                double taxAmount = pretax * taxRate;
+                double netPay = pretax - taxAmount;
+
+                //output
+                pretaxOutput.Text = $"{pretax.ToString("$##.00")}";
+                taxOutput.Text = $"{taxAmount.ToString("C")}";
+                earnedOutput.Text = $"{netPay.ToString("C")}";
+            }
+            catch 
+            {
+                pretaxOutput.Text = "";
+                taxOutput.Text = "";
+                earnedOutput.Text = "ERROR!!!!";
+            }
+        }
     }
 }
